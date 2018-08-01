@@ -42,8 +42,11 @@ namespace Memores.NetAPMAgent.Model.Base
         /// The type of the object
         /// </summary>
         public string Type { get; set; }
+        
+       
+        internal abstract TrackingObject Start(TrackingObject trackingObject = null);
 
-
-        public abstract void End();
+        
+        internal abstract void End();
     }
 }

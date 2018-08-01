@@ -36,17 +36,36 @@ namespace Memores.NetAPMAgent.Model {
         /// Start transaction
         /// </summary>
         /// <returns></returns>
-        public Transaction Start() {
+        protected Transaction Start(Transaction transaction) {
             Id = Guid.NewGuid();
+            DateStart = DateTime.UtcNow;
+
             return this;
+        }
+
+
+        /// <inheritdoc />
+        internal override TrackingObject Start(TrackingObject trackingObject = null) {
+            return Start(trackingObject);
         }
 
 
         /// <summary>
         /// End tracking the transaction
         /// </summary>
-        public override void End() {
+        internal override void End() {
+            DateEnd = DateTime.UtcNow;
             _tracer.EndTransaction(this);
+        }
+
+
+        public void AddTag() {
+            
+        }
+
+
+        public void AddSpan() {
+            
         }
 
 

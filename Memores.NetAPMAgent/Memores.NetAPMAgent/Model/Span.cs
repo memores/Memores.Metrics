@@ -17,14 +17,19 @@ namespace Memores.NetAPMAgent.Model {
         }
         
 
-        public Span Start(Transaction transaction) {
+        protected Span Start(Transaction transaction) {
             Id = Guid.NewGuid();
-            TransactionId = transaction.Id;
+            TransactionId = transaction?.Id;
             return this;
         }
 
 
-        public override void End() {
+        internal override TrackingObject Start(TrackingObject trackingObject = null) {
+            return Start(trackingObject);
+        }
+
+
+        internal override void End() {
             _tracer.EndSpan(this);
         }
         
