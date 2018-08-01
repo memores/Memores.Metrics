@@ -1,26 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using Memores.NetAPMAgent.Model.Base;
 
 
-namespace Memores.NetAPMAgent {
+namespace Memores.NetAPMAgent.Model {
     /// <summary>
     /// Span contains information about a specific code path, executed as part of a transaction
     /// </summary>
-    public abstract class Span : IDisposable {
-        public string Name { get; set; }
-        public string Type { get; set; }
-       
+    public class Span : TrackingObject, IDisposable {
+        readonly ITracer _tracer;
+  
+        public Guid TransactionId { get; set; }
 
-        public Span(string name, string type) {
-            Name = name;
-            Type = type;
+
+        public Span(ITracer tracer) {
+            _tracer = tracer;
+        }
+        
+
+        public Span Start(Transaction transaction) {
+            Id = Guid.NewGuid();
+            TransactionId = transaction.Id;
+            return this;
         }
 
 
-        public abstract void End();
-
-
+        public override void End() {
+            _tracer.EndSpan(this);
+        }
+        
+        
         #region IDisposable impl
 
         public void Dispose() {

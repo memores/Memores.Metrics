@@ -12,7 +12,11 @@ namespace Memores.NetAPMAgent
     public interface ITracer {
         Transaction StartTransaction();
 
-        Span StartSpan();
+        Span StartSpan(Transaction transaction = null);
+
+        void EndTransaction(Transaction transaction);
+
+        void EndSpan(Span span); 
 
         void CaptureException(Exception e);
     }

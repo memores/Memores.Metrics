@@ -1,24 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using Memores.NetAPMAgent.Model.Base;
 
 
 namespace Memores.NetAPMAgent.Model {
     /// <summary>
     /// Transaction is the data captured by an agent representing an event occurring in a monitored service and groups multiple spans in a logical group
     /// </summary>
-    public abstract class Transaction : IDisposable {
-
-        /// <summary>
-        /// Name of the current transaction
-        /// </summary>
-        public string Name { get; set; }
-
-
-        /// <summary>
-        /// The type of the transaction
-        /// </summary>
-        public string Type { get; set; }
-
+    public class Transaction : TrackingObject, IDisposable {
+        readonly ITracer _tracer;
 
         /// <summary>
         /// Information about the user/client
@@ -31,17 +21,33 @@ namespace Memores.NetAPMAgent.Model {
         /// </summary>
         public virtual ICollection<Tag> Tags { get; set; }
 
+        /// <summary>
+        /// Span elements, which contains information about transaction parts
+        /// </summary>
+        public virtual ICollection<Span> Spans { get; set; }
 
-        public Transaction(string name, string type) {
-            Name = name;
-            Type = type;
+
+        public Transaction(ITracer tracer) {
+            _tracer = tracer;
+        }
+
+
+        /// <summary>
+        /// Start transaction
+        /// </summary>
+        /// <returns></returns>
+        public Transaction Start() {
+            Id = Guid.NewGuid();
+            return this;
         }
 
 
         /// <summary>
         /// End tracking the transaction
         /// </summary>
-        public abstract void End();
+        public override void End() {
+            _tracer.EndTransaction(this);
+        }
 
 
         #region IDisposable impl
