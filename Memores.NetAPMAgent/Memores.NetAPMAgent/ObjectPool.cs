@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
+using Memores.NetAPMAgent.Model.Base;
 
 
 namespace Memores.NetAPMAgent {
@@ -12,7 +13,7 @@ namespace Memores.NetAPMAgent {
     ///     <cref>https://docs.microsoft.com/ru-ru/dotnet/standard/collections/thread-safe/how-to-create-an-object-pool</cref>
     /// </see>
     /// <typeparam name="T"></typeparam>
-    public class ObjectPool<T> {
+    public class ObjectPool<T> where T : Recyclable {
         ConcurrentBag<T> _objects;
         Func<T> _objectGenerator;
 
@@ -32,6 +33,12 @@ namespace Memores.NetAPMAgent {
 
 
         public void PutObject(T item) {
+            _objects.Add(item);
+        }
+
+
+        public void Recycle(T item) {
+            item.ResetState();
             _objects.Add(item);
         }
     }

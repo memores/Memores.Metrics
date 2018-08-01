@@ -39,11 +39,18 @@ namespace Memores.NetAPMAgent {
         /// <param name="span"><see cref="Span"/></param>
         void EndSpan(Span span);
 
-
+        
         /// <summary>
         /// Capture and trace any exception
         /// </summary>
         /// <param name="e"><exception cref="Exception"></exception></param>
-        void CaptureException(Exception e);
+        void CaptureError(Error error);
+
+
+        void Recycle(Transaction transaction);
+        
+
+        void Recycle(Span span);
+
     }
 }

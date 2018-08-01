@@ -19,7 +19,8 @@ namespace Memores.NetAPMAgent.Model {
 
         protected Span Start(Transaction transaction) {
             Id = Guid.NewGuid();
-            TransactionId = transaction?.Id;
+            TransactionId = transaction.Id;
+            DateStart = DateTime.UtcNow;
             return this;
         }
 
@@ -30,6 +31,7 @@ namespace Memores.NetAPMAgent.Model {
 
 
         internal override void End() {
+            DateEnd = DateTime.UtcNow;
             _tracer.EndSpan(this);
         }
         
@@ -41,5 +43,12 @@ namespace Memores.NetAPMAgent.Model {
         }
 
         #endregion
+
+
+        public override void ResetState() {
+            base.ResetState();
+
+            TransactionId = default(Guid);
+        }
     }
 }

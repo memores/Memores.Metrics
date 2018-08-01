@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using Memores.NetAPMAgent.Model;
 
 
-namespace Memores.NetAPMAgent.Impl
-{
-    public class Tracer: ITracer {
+namespace Memores.NetAPMAgent.Impl {
+    public class Tracer : ITracer {
         readonly IReporter _reporter;
 
         readonly ObjectPool<Transaction> _transactionsPool;
@@ -32,19 +32,49 @@ namespace Memores.NetAPMAgent.Impl
 
 
         public void EndTransaction(Transaction transaction) {
-            transaction.End();
-            _reporter.Report(transaction);
+            try {
+                _reporter.Report(transaction);
+            }
+            catch (Exception e) {
+                Debug.Write(e);
+                throw;
+            }
+            finally {
+                transaction.Recycle(transaction);
+            }
         }
 
 
         public void EndSpan(Span span) {
-            span.End();
-            _reporter.Report(span);
+            try {
+                _reporter.Report(span);
+            }
+            catch (Exception e) {
+                Debug.Write(e);
+                throw;
+            }
+            finally {
+                span.Recycle(span);
+            }
         }
 
 
-        public void CaptureException(Exception e) {
-            _reporter.Report(new Error() {Exception = e});
+        public void CaptureError(Error error) {
+            _reporter.Report(error);
         }
+
+
+        public void Recycle(Span span) {
+            _spansPool.Recycle(span);
+        }
+
+
+        public void Recycle(Transaction transaction) {
+            foreach (var span in transaction.Spans) {
+                _spansPool.Recycle(span);
+            }
+            _transactionsPool.Recycle(transaction);
+        }
+
     }
 }

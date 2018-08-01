@@ -10,6 +10,7 @@ namespace Memores.NetAPMAgent.Model {
     public class Transaction : TrackingObject, IDisposable {
         readonly ITracer _tracer;
 
+
         /// <summary>
         /// Information about the user/client
         /// </summary>
@@ -19,12 +20,13 @@ namespace Memores.NetAPMAgent.Model {
         /// <summary>
         /// User-defined tags with string values. Note: the tags are indexed in Elasticsearch so that they are searchable and aggregatable
         /// </summary>
-        public virtual ICollection<Tag> Tags { get; set; }
+        public virtual ICollection<Tag> Tags { get; set; } = new List<Tag>();
+
 
         /// <summary>
         /// Span elements, which contains information about transaction parts
         /// </summary>
-        public virtual ICollection<Span> Spans { get; set; }
+        public virtual ICollection<Span> Spans { get; set; } = new List<Span>();
 
 
         public Transaction(ITracer tracer) {
@@ -36,17 +38,16 @@ namespace Memores.NetAPMAgent.Model {
         /// Start transaction
         /// </summary>
         /// <returns></returns>
-        protected Transaction Start(Transaction transaction) {
+        protected Transaction Start() {
             Id = Guid.NewGuid();
             DateStart = DateTime.UtcNow;
-
             return this;
         }
-
+        
 
         /// <inheritdoc />
         internal override TrackingObject Start(TrackingObject trackingObject = null) {
-            return Start(trackingObject);
+            return Start();
         }
 
 
@@ -59,13 +60,13 @@ namespace Memores.NetAPMAgent.Model {
         }
 
 
-        public void AddTag() {
-            
+        public void AddTag(Tag tag) {
+           Tags.Add(tag);
         }
 
 
-        public void AddSpan() {
-            
+        public void AddSpan(Span span) {
+            Spans.Add(span);
         }
 
 
@@ -76,5 +77,19 @@ namespace Memores.NetAPMAgent.Model {
         }
 
         #endregion
+
+
+        public override void ResetState() {
+            base.ResetState();
+
+            User = null;
+            Tags.Clear();
+            Spans.Clear();
+        }
+
+
+        public void Recycle(Transaction transaction) {
+            throw new NotImplementedException();
+        }
     }
 }

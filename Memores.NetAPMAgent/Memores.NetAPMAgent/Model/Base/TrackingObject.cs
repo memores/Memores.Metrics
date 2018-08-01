@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Memores.NetAPMAgent.Model.Base
 {
-    public abstract class TrackingObject
+    public abstract class TrackingObject : Recyclable
     {
         /// <summary>
         /// Object UUID
@@ -48,5 +48,15 @@ namespace Memores.NetAPMAgent.Model.Base
 
         
         internal abstract void End();
+
+
+        public override void ResetState() {
+            Id = default(Guid);
+            TransactionId = default(Guid);
+            DateStart = default(DateTime);
+            DateEnd = default(DateTime);
+            Name = null;
+            Type = null;
+        }
     }
 }
