@@ -22,10 +22,14 @@ namespace Memores.NetAPMAgent.Impl {
 
 
         public void Report(Transaction transaction) {
+            Payload payload = new Payload() {
+                Transactions = new[] { transaction }
+            };
+
             List<Span> spans;
             lock (_lockObject) {
                 if (!_spansToPayload.TryGetValue(transaction.Id, out spans)) {
-                    _payloader.SendPayload(new Payload() {Transactions = new[] {transaction}});
+                    _payloader.SendPayload(payload);
                     return;
                 }
             }
@@ -34,9 +38,7 @@ namespace Memores.NetAPMAgent.Impl {
                 transaction.AddSpan(span);
             }
 
-            _payloader.SendPayload(new Payload() {
-                Transactions = new[] {transaction}
-            });
+            _payloader.SendPayload(payload);
         }
 
 
