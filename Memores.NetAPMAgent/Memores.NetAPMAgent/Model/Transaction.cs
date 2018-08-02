@@ -16,6 +16,10 @@ namespace Memores.NetAPMAgent.Model {
         /// </summary>
         public User User { get; set; }
 
+        /// <summary>
+        /// Result of transaction
+        /// </summary>
+        public string Result { get; set; }
 
         /// <summary>
         /// User-defined tags with string values. Note: the tags are indexed in Elasticsearch so that they are searchable and aggregatable
@@ -89,7 +93,7 @@ namespace Memores.NetAPMAgent.Model {
 
 
         public void Recycle(Transaction transaction) {
-            throw new NotImplementedException();
+            _tracer.Recycle(transaction);
         }
     }
 }

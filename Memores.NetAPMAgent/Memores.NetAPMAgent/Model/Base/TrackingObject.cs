@@ -52,7 +52,6 @@ namespace Memores.NetAPMAgent.Model.Base
 
         public override void ResetState() {
             Id = default(Guid);
-            TransactionId = default(Guid);
             DateStart = default(DateTime);
             DateEnd = default(DateTime);
             Name = null;

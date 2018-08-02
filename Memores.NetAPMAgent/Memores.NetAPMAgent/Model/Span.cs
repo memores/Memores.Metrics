@@ -50,5 +50,10 @@ namespace Memores.NetAPMAgent.Model {
 
             TransactionId = default(Guid);
         }
+
+
+        public void Recycle(Span span) {
+            _tracer.Recycle(span);
+        }
     }
 }

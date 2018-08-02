@@ -9,7 +9,7 @@ namespace Memores.NetAPMAgent
     /// <summary>
     /// Reports to APM server about transactions, spans and errors
     /// </summary>
-    public interface IReporter: IDisposable
+    public interface IReporter
     {
 
 

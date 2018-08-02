@@ -23,7 +23,7 @@ namespace Memores.NetAPMAgent {
         /// </summary>
         /// <param name="transaction"><see cref="Transaction"/></param>
         /// <returns><see cref="Span"/></returns>
-        Span StartSpan(Transaction transaction = null);
+        Span StartSpan(Transaction transaction);
 
 
         /// <summary>

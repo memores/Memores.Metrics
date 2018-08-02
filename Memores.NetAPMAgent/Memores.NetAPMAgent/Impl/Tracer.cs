@@ -26,7 +26,7 @@ namespace Memores.NetAPMAgent.Impl {
         }
 
 
-        public Span StartSpan(Transaction transaction = null) {
+        public Span StartSpan(Transaction transaction) {
             return _spansPool.GetObject().Start(transaction) as Span;
         }
 
