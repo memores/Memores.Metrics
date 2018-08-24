@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Text;
+using Memores.NetAPMAgent.Configuration;
 using Memores.NetAPMAgent.Contracts;
 using Memores.NetAPMAgent.Model;
 
@@ -11,19 +12,27 @@ using Memores.NetAPMAgent.Model;
 namespace Memores.NetAPMAgent.Impl {
     public class Reporter : IReporter {
         readonly IPayloader _payloader;
+        readonly IConfigurationManager _configurationManager;
 
         readonly ConcurrentDictionary<Guid, List<Span>> _spansToPayload;
         readonly object _lockObject = new object();
 
-        public Reporter(IPayloader payloader) {
+
+        public Reporter(IPayloader payloader, IConfigurationManager configurationManager) {
             _payloader = payloader;
+            _configurationManager = configurationManager;
             _spansToPayload = new ConcurrentDictionary<Guid, List<Span>>();
         }
 
 
         public void Report(Transaction transaction) {
+            var configuration = _configurationManager.GetCurrentConfiguration();
+
             Payload payload = new Payload() {
-                Transactions = new[] { transaction }
+                Service = configuration.Service,
+                Process = configuration.Process,
+                SystemInfo = configuration.SystemInfo,
+                Transactions = new[] {transaction}
             };
 
             List<Span> spans;
@@ -56,7 +65,7 @@ namespace Memores.NetAPMAgent.Impl {
 
 
         public void Report(Error error) {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
     }
 }
