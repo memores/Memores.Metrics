@@ -9,8 +9,7 @@ namespace Memores.NetAPMAgent.Configuration.Model {
         public Service Service { get; set; }
 
         public SystemInfo SystemInfo { get; set; }
-
-
+        
         public Process Process { get; set; }
     }
 }

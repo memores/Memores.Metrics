@@ -2,7 +2,7 @@
 
 namespace Memores.NetAPMAgent.Configuration
 {
-    interface IConfigurationManager
+    public interface IConfigurationManager
     {
         NetApmAgentConfiguration GetCurrentConfiguration();
     }

@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Memores.NetAPMAgent.Configuration
 {
-    class ConfigurationManager : IConfigurationManager
+    class NetApmAgentConfigurationManager : IConfigurationManager
     {
         public NetApmAgentConfiguration GetCurrentConfiguration() {
             return new NetApmAgentConfiguration() {

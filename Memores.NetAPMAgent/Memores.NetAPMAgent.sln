@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Memores.NetAPMAgent", "Memores.NetAPMAgent\Memores.NetAPMAgent.csproj", "{06F2428E-4EF4-4A31-9CEA-EB86950A961D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Memores.NetAPMAgent", "Memores.NetAPMAgent\Memores.NetAPMAgent.csproj", "{06F2428E-4EF4-4A31-9CEA-EB86950A961D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{30998FAE-D092-4DF2-8970-5E31D5987FA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetAPMAgent.ConsoleSample", "NetAPMAgent.ConsoleSample\NetAPMAgent.ConsoleSample.csproj", "{98CB1D95-DA4E-4E02-B5FE-3EC6B0D36FEA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{06F2428E-4EF4-4A31-9CEA-EB86950A961D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06F2428E-4EF4-4A31-9CEA-EB86950A961D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06F2428E-4EF4-4A31-9CEA-EB86950A961D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98CB1D95-DA4E-4E02-B5FE-3EC6B0D36FEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98CB1D95-DA4E-4E02-B5FE-3EC6B0D36FEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98CB1D95-DA4E-4E02-B5FE-3EC6B0D36FEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98CB1D95-DA4E-4E02-B5FE-3EC6B0D36FEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{98CB1D95-DA4E-4E02-B5FE-3EC6B0D36FEA} = {30998FAE-D092-4DF2-8970-5E31D5987FA3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {26FCF88F-FFA1-412C-9C02-6A030DD9DA01}
