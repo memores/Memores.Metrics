@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Memores.NetAPMAgent", "Memo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{30998FAE-D092-4DF2-8970-5E31D5987FA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetAPMAgent.ConsoleSample", "NetAPMAgent.ConsoleSample\NetAPMAgent.ConsoleSample.csproj", "{98CB1D95-DA4E-4E02-B5FE-3EC6B0D36FEA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetAPMAgent.ConsoleSample", "samples\NetAPMAgent.ConsoleSample\NetAPMAgent.ConsoleSample.csproj", "{98CB1D95-DA4E-4E02-B5FE-3EC6B0D36FEA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Memores.NetAPMAgent\Memores.NetAPMAgent.csproj" />
+    <ProjectReference Include="..\..\Memores.NetAPMAgent\Memores.NetAPMAgent.csproj" />
   </ItemGroup>
 
 </Project>
