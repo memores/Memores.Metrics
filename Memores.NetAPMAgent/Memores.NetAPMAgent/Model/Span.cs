@@ -26,7 +26,7 @@ namespace Memores.NetAPMAgent.Model {
 
 
         internal override TrackingObject Start(TrackingObject trackingObject = null) {
-            return Start(trackingObject);
+            return Start((Transaction) trackingObject);
         }
 
 

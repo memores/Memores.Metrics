@@ -1,15 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Memores.NetAPMAgent.Impl;
+
 
 namespace Memores.NetAPMAgent
 {
-    public static class TracerBuilder
+    public class TracerBuilder
     {
-        public static ITracer Build(string apmServer = "htpp://localhost:9200/") {
-            throw new NotImplementedException();
+        IReporter _reporter;
+
+
+        public ITracer Build(string apmServer = "http://localhost:9200/") {
+            if (_reporter == null)
+                _reporter = new ReporterFactory().CreateReporter(apmServer);
+
+            return new Tracer(_reporter);
         }
     }
 }
