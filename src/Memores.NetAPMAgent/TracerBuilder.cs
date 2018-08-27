@@ -8,7 +8,7 @@ namespace Memores.NetAPMAgent
         IReporter _reporter;
 
 
-        public ITracer Build(string apmServer = "http://localhost:9200/") {
+        public ITracer Build(string apmServer = "http://localhost:8200/") {
             if (_reporter == null)
                 _reporter = new ReporterFactory().CreateReporter(apmServer);
 
