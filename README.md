@@ -1,2 +1,2 @@
-# Memores.NetAPMAgent
-.Net APM agent for Elastic
+# Memores.Metrics
+Metrics for .Net reporting to ElasticSearch
