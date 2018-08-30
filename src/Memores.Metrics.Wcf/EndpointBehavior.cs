@@ -26,6 +26,7 @@ namespace Memores.Metrics.Wcf {
         public void ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher) {
             foreach (var operation in endpointDispatcher.DispatchRuntime.Operations) {
                 operation.CallContextInitializers.Add(new CallContextInitializer(_reporter));
+                operation.ParameterInspectors.Add(new ParametersInspector(_reporter));
             }
         }
 

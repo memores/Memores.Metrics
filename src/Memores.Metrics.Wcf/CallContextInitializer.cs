@@ -6,23 +6,34 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
 using System.Text;
 using System.Threading.Tasks;
+using Memores.Metrics.Wcf.Model;
 
 namespace Memores.Metrics.Wcf
 {
     public class CallContextInitializer : ICallContextInitializer
     {
         private readonly IMetricsReporter _reporter;
+        private MetricsReport _callContextMetricsReport;
 
         public CallContextInitializer(IMetricsReporter reporter) {
             _reporter = reporter;
         }
 
         public object BeforeInvoke(InstanceContext instanceContext, IClientChannel channel, Message message) {
-            throw new NotImplementedException();
+            _callContextMetricsReport = new MetricsReport() {
+                Tags = new List<Tag>() {
+                    new Tag() {
+                        Key = TagsKeys.SourceName.ToString(),
+                        Value = nameof(CallContextInitializer)
+                    }
+                }
+            };
+            
+            return null;
         }
 
         public void AfterInvoke(object correlationState) {
-            throw new NotImplementedException();
+            _reporter.Report(_callContextMetricsReport);
         }
     }
 }
