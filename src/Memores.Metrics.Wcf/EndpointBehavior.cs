@@ -9,6 +9,12 @@ using System.Threading.Tasks;
 
 namespace Memores.Metrics.Wcf {
     public class EndpointBehavior : IEndpointBehavior {
+        private readonly IMetricsReporter _reporter;
+
+        public EndpointBehavior(IMetricsReporter reporter) {
+            _reporter = reporter;
+        }
+
         public void Validate(ServiceEndpoint endpoint) {
             //do nothing
         }
@@ -19,7 +25,7 @@ namespace Memores.Metrics.Wcf {
 
         public void ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher) {
             foreach (var operation in endpointDispatcher.DispatchRuntime.Operations) {
-                operation.CallContextInitializers.Add(new CallContextInitializer());
+                operation.CallContextInitializers.Add(new CallContextInitializer(_reporter));
             }
         }
 

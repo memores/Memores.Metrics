@@ -11,6 +11,12 @@ namespace Memores.Metrics.Wcf
 {
     public class CallContextInitializer : ICallContextInitializer
     {
+        private readonly IMetricsReporter _reporter;
+
+        public CallContextInitializer(IMetricsReporter reporter) {
+            _reporter = reporter;
+        }
+
         public object BeforeInvoke(InstanceContext instanceContext, IClientChannel channel, Message message) {
             throw new NotImplementedException();
         }
