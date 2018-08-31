@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.ServiceModel.Configuration;
+using Memores.Metrics.Wcf.Behaviors;
 using Memores.Metrics.Wcf.Reporters;
 
 namespace Memores.Metrics.Wcf.ExtentionElements {

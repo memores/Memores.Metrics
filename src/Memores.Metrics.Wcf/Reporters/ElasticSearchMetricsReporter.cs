@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Memores.Metrics.Wcf.Model;
+using Memores.Metrics.Wcf.Reporters.Counters;
 using Nest;
 
 namespace Memores.Metrics.Wcf.Reporters {
@@ -22,13 +23,13 @@ namespace Memores.Metrics.Wcf.Reporters {
             return _reporter;
         }
 
+
         private ElasticSearchMetricsReporter(string host, int port, string index) {
             _client = GetClient(host, port, index);
 
-            StartRatesCalculating();
+            var ratesCounter = new ElasticSearchRatesCounter(this);
+            ratesCounter.Start();
         }
-
-
 
 
         public void Report(MetricsReport metricsReport) {
@@ -37,55 +38,13 @@ namespace Memores.Metrics.Wcf.Reporters {
             _client.Index(metricsReport);
         }
 
-
-
-        void StartRatesCalculating(int timeout = 3000) {
-            Task.Factory.StartNew(async () => {
-                while (true) {
-                    var currentDateTime = DateTime.Now;
-                    var rate1m = _client.Count<MetricsReport>(c => c
-                        .Query(q =>
-                            q.Match(m => m.Field(f => f.MetricsReportType).Query(((int)MetricsReportTypes.ServiceCall).ToString())) &&
-                            q.DateRange(
-                                r => r.Field(f => f.DateStart)
-                                    .GreaterThanOrEquals(currentDateTime.AddMinutes(-1))
-                                    .LessThan(currentDateTime)
-                            )));
-
-                    var rate5m = _client.Count<MetricsReport>(c => c
-                        .Query(q =>
-                            q.Match(m => m.Field(f => f.MetricsReportType).Query(((int) MetricsReportTypes.ServiceCall).ToString())) &&
-                            q.DateRange(
-                                r => r.Field(f => f.DateStart)
-                                    .GreaterThanOrEquals(currentDateTime.AddMinutes(-5))
-                                    .LessThan(currentDateTime)
-                            )));
-
-                    var rate15m = _client.Count<MetricsReport>(c => c
-                        .Query(q =>
-                            q.Match(m => m.Field(f => f.MetricsReportType).Query(((int)MetricsReportTypes.ServiceCall).ToString())) &&
-                            q.DateRange(
-                                r => r.Field(f => f.DateStart)
-                                    .GreaterThanOrEquals(currentDateTime.AddMinutes(-15))
-                                    .LessThan(currentDateTime)
-                            )));
-                    
-                    Report(new MetricsReport() {
-                        MetricsReportType = MetricsReportTypes.Rates,
-                        Rate1m = rate1m.Count,
-                        Rate5m = rate5m.Count,
-                        Rate15m = rate15m.Count
-                    });
-
-                    await Task.Delay(timeout);
-                }
-            }, TaskCreationOptions.LongRunning);
+        private ElasticClient GetClient(string host, int port, string index) {
+            var settings = new ConnectionSettings(new Uri($"{host}:{port}")).DefaultIndex(index);
+            return _client ?? new ElasticClient(settings);
         }
 
-
-        ElasticClient GetClient(string host, int port, string index) {
-           var settings = new ConnectionSettings(new Uri($"{host}:{port}")).DefaultIndex(index);
-           return new ElasticClient(settings);
-       }
+        protected internal ElasticClient GetClient() {
+            return _client;
+        }
     }
 }

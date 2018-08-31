@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel.Channels;
+﻿using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
-using System.Text;
-using System.Threading.Tasks;
+using Memores.Metrics.Wcf.Handlers;
 
-namespace Memores.Metrics.Wcf {
+namespace Memores.Metrics.Wcf.Behaviors {
     public class EndpointBehavior : IEndpointBehavior {
         private readonly IMetricsReporter _reporter;
 
@@ -29,6 +25,7 @@ namespace Memores.Metrics.Wcf {
                 operation.ParameterInspectors.Add(new ParametersInspector(_reporter));
             }
         }
+        
 
         public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime) {
             //do nothing

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
-using System.Text;
-using System.Threading.Tasks;
 using Memores.Metrics.Wcf.Model;
 
-namespace Memores.Metrics.Wcf
+namespace Memores.Metrics.Wcf.Handlers
 {
     public class CallContextInitializer : ICallContextInitializer
     {
