@@ -21,6 +21,7 @@ namespace Memores.Metrics.Wcf
 
         public object BeforeInvoke(InstanceContext instanceContext, IClientChannel channel, Message message) {
             _callContextMetricsReport = new MetricsReport() {
+                OperationName = "ServiceCall",
                 Tags = new List<Tag>() {
                     new Tag() {
                         Key = TagsKeys.SourceName.ToString(),

@@ -44,9 +44,9 @@ namespace Memores.Metrics.Wcf.Reporters {
                 while (true)
                 {
                     var currentDateTime = DateTime.Now;
-                    //todo: bug in query (calculates all elastic elements)
                     var rate1m = _client.Count<MetricsReport>(c => c
                         .Query(q =>
+                            q.Match(m=>m.Field(f=>f.OperationName).Query("ServiceCall")) &&
                             q.DateRange(
                                 r => r.Field(f => f.DateStart)
                                     .GreaterThanOrEquals(currentDateTime.AddMinutes(-1))
@@ -54,6 +54,7 @@ namespace Memores.Metrics.Wcf.Reporters {
                             ))).Count;
                     var rate5m = _client.Count<MetricsReport>(c => c
                         .Query(q =>
+                            q.Match(m => m.Field(f => f.OperationName).Query("ServiceCall")) &&
                             q.DateRange(
                                 r => r.Field(f => f.DateStart)
                                     .GreaterThanOrEquals(currentDateTime.AddMinutes(-5))
@@ -61,6 +62,7 @@ namespace Memores.Metrics.Wcf.Reporters {
                             ))).Count;
                     var rate15m = _client.Count<MetricsReport>(c => c
                         .Query(q =>
+                            q.Match(m => m.Field(f => f.OperationName).Query("ServiceCall")) &&
                             q.DateRange(
                                 r => r.Field(f => f.DateStart)
                                     .GreaterThanOrEquals(currentDateTime.AddMinutes(-15))
