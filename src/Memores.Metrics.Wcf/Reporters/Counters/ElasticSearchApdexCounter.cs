@@ -40,7 +40,7 @@ namespace Memores.Metrics.Wcf.Reporters.Counters {
                             .LessThan(currentDateTime)
                     ))).Count;
 
-            return (satisfiedCalls + (toleratedCalls / 2)) / calls;
+            return calls == 0 ? 1 : (satisfiedCalls + (toleratedCalls / 2)) / calls;
         }
     }
 }
