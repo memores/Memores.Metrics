@@ -9,15 +9,15 @@ namespace Memores.Metrics.Wcf.Behaviors
     public class ServiceBehavior: IServiceBehavior
     {
         public void Validate(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase) {
-            throw new NotImplementedException();
+            //do nothing
         }
 
         public void AddBindingParameters(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection bindingParameters) {
-            throw new NotImplementedException();
+            //do nothing
         }
 
         public void ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase) {
-           throw new NotImplementedException();
+            //do nothing
         }
     }
 }

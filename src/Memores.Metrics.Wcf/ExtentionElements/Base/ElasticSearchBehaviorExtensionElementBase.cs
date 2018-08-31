@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Configuration;
 using System.ServiceModel.Configuration;
-using Memores.Metrics.Wcf.Behaviors;
 using Memores.Metrics.Wcf.Reporters;
 
-namespace Memores.Metrics.Wcf.ExtentionElements {
-    public class ElasticSearchBehaviorExtensionElement : BehaviorExtensionElement {
+namespace Memores.Metrics.Wcf.ExtentionElements.Base {
+    public abstract class ElasticSearchBehaviorExtensionElementBase<TBehavior> : BehaviorExtensionElement {
 
         [ConfigurationProperty("hostname", IsRequired = true)]
         public string Hostname => (string) base["hostname"];
@@ -17,10 +16,12 @@ namespace Memores.Metrics.Wcf.ExtentionElements {
         public string Index => (string) base["index"];
 
 
-        public override Type BehaviorType => typeof(EndpointBehavior);
+        public override Type BehaviorType => typeof(TBehavior);
 
         protected override object CreateBehavior() {
-            return new EndpointBehavior(ElasticSearchMetricsReporter.GetReporter(Hostname, Port, Index));
+            return Build(ElasticSearchMetricsReporter.GetReporter(Hostname, Port, Index));
         }
+
+        protected abstract object Build(ElasticSearchMetricsReporter reporter);
     }
 }

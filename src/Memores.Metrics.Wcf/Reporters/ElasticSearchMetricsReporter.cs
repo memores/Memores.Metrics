@@ -7,7 +7,7 @@ using Memores.Metrics.Wcf.Reporters.Counters;
 using Nest;
 
 namespace Memores.Metrics.Wcf.Reporters {
-    class ElasticSearchMetricsReporter : IMetricsReporter {
+    public class ElasticSearchMetricsReporter : IMetricsReporter {
         private static readonly object lockObject = new object();
         private static volatile ElasticSearchMetricsReporter _reporter;
 
