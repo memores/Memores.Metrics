@@ -10,10 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Memores.Metrics.NetAPMAgent\Memores.Metrics.NetAPMAgent.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="System.Configuration" />
     <Reference Include="System.ServiceModel" />
   </ItemGroup>

@@ -27,8 +27,7 @@ namespace Memores.Metrics.Wcf.Reporters {
         private ElasticSearchMetricsReporter(string host, int port, string index) {
             _client = GetClient(host, port, index);
 
-            var ratesCounter = new ElasticSearchRatesCounter(this);
-            ratesCounter.Start();
+            new ElasticSearchRatesCounter(this).Start();
         }
 
 

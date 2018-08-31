@@ -31,7 +31,7 @@ namespace Memores.Metrics.Wcf.Reporters.Counters {
             }, TaskCreationOptions.LongRunning);
         }
 
-        protected abstract long GetRate(DateTime curreDateTime, int min);
+        protected abstract long GetRate(DateTime currentDateTime, int min);
 
         public void Stop() {
             //do nothing

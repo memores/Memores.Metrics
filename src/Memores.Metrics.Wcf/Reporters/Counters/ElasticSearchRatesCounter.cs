@@ -13,14 +13,14 @@ namespace Memores.Metrics.Wcf.Reporters.Counters {
             _elasticSearchMetricsReporter = reporter as ElasticSearchMetricsReporter;
         }
 
-        protected override long GetRate(DateTime curreDateTime, int min) {
+        protected override long GetRate(DateTime currentDateTime, int min) {
             return _elasticSearchMetricsReporter.GetClient().Count<MetricsReport>(c => c
                 .Query(q =>
                     q.Match(m => m.Field(f => f.MetricsReportType).Query(((int)MetricsReportTypes.ServiceCall).ToString())) &&
                     q.DateRange(
                         r => r.Field(f => f.DateStart)
-                            .GreaterThanOrEquals(curreDateTime.AddMinutes(-min))
-                            .LessThan(curreDateTime)
+                            .GreaterThanOrEquals(currentDateTime.AddMinutes(-min))
+                            .LessThan(currentDateTime)
                     ))).Count;
         }
     }
