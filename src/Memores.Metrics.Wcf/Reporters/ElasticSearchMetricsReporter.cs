@@ -39,41 +39,42 @@ namespace Memores.Metrics.Wcf.Reporters {
 
 
 
-        void StartRatesCalculating(int timeout = 1000) {
+        void StartRatesCalculating(int timeout = 3000) {
             Task.Factory.StartNew(async () => {
-                while (true)
-                {
+                while (true) {
                     var currentDateTime = DateTime.Now;
                     var rate1m = _client.Count<MetricsReport>(c => c
                         .Query(q =>
-                            q.Match(m=>m.Field(f=>f.OperationName).Query("ServiceCall")) &&
+                            q.Match(m => m.Field(f => f.MetricsReportType).Query(((int)MetricsReportTypes.ServiceCall).ToString())) &&
                             q.DateRange(
                                 r => r.Field(f => f.DateStart)
                                     .GreaterThanOrEquals(currentDateTime.AddMinutes(-1))
                                     .LessThan(currentDateTime)
-                            ))).Count;
+                            )));
+
                     var rate5m = _client.Count<MetricsReport>(c => c
                         .Query(q =>
-                            q.Match(m => m.Field(f => f.OperationName).Query("ServiceCall")) &&
+                            q.Match(m => m.Field(f => f.MetricsReportType).Query(((int) MetricsReportTypes.ServiceCall).ToString())) &&
                             q.DateRange(
                                 r => r.Field(f => f.DateStart)
                                     .GreaterThanOrEquals(currentDateTime.AddMinutes(-5))
                                     .LessThan(currentDateTime)
-                            ))).Count;
+                            )));
+
                     var rate15m = _client.Count<MetricsReport>(c => c
                         .Query(q =>
-                            q.Match(m => m.Field(f => f.OperationName).Query("ServiceCall")) &&
+                            q.Match(m => m.Field(f => f.MetricsReportType).Query(((int)MetricsReportTypes.ServiceCall).ToString())) &&
                             q.DateRange(
                                 r => r.Field(f => f.DateStart)
                                     .GreaterThanOrEquals(currentDateTime.AddMinutes(-15))
                                     .LessThan(currentDateTime)
-                            ))).Count;
-
+                            )));
+                    
                     Report(new MetricsReport() {
-                        OperationName = "RatesCalculator",
-                        Rate1m = rate1m,
-                        Rate5m = rate5m,
-                        Rate15m = rate15m,
+                        MetricsReportType = MetricsReportTypes.Rates,
+                        Rate1m = rate1m.Count,
+                        Rate5m = rate5m.Count,
+                        Rate15m = rate15m.Count
                     });
 
                     await Task.Delay(timeout);

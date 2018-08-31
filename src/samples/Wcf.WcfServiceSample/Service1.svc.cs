@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Threading;
 
 namespace Wcf.WcfServiceSample
 {
@@ -14,11 +15,14 @@ namespace Wcf.WcfServiceSample
     {
         public string GetData(int value)
         {
+            Thread.Sleep(5);
             return string.Format("You entered: {0}", value);
         }
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
         {
+            Thread.Sleep(10);
+
             if (composite == null)
             {
                 throw new ArgumentNullException("composite");

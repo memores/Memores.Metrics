@@ -9,6 +9,8 @@ namespace Memores.Metrics.Wcf.Model {
             DateStart = DateTime.Now;
         }
 
+        public MetricsReportTypes MetricsReportType { get; set; }
+
         public long Rate1m { get; set; }
 
         public long Rate5m { get; set; }
@@ -23,6 +25,7 @@ namespace Memores.Metrics.Wcf.Model {
 
         public DateTime DateEnd { get; set; }
 
+        public long ProcessingTime { get; set; }
 
         public List<Tag> Tags { get; set; }    
     }
