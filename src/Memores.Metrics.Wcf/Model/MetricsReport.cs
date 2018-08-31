@@ -17,6 +17,8 @@ namespace Memores.Metrics.Wcf.Model {
 
         public long Rate15m { get; set; }
 
+        public long Apdex { get; set; }
+
         public string OperationName { get; set; }
 
         public DateTime TimeStamp { get; set; }

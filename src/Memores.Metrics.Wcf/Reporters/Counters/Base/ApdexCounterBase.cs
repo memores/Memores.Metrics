@@ -2,11 +2,11 @@
 using System.Threading.Tasks;
 using Memores.Metrics.Wcf.Model;
 
-namespace Memores.Metrics.Wcf.Reporters.Counters {
-    public abstract class RatesCounterBase : ICounter {
+namespace Memores.Metrics.Wcf.Reporters.Counters.Base {
+    public abstract class ApdexCounterBase : ICounter {
         protected readonly IMetricsReporter _reporter;
 
-        public RatesCounterBase(IMetricsReporter reporter) {
+        protected ApdexCounterBase(IMetricsReporter reporter) {
             _reporter = reporter;
         }
 
@@ -15,15 +15,9 @@ namespace Memores.Metrics.Wcf.Reporters.Counters {
                 while (true) {
                     var currentDateTime = DateTime.Now;
 
-                    var rate1m = GetRate(currentDateTime, 1);
-                    var rate5m = GetRate(currentDateTime, 5);
-                    var rate15m = GetRate(currentDateTime, 15);
-
                     _reporter.Report(new MetricsReport() {
-                        MetricsReportType = MetricsReportTypes.Rates,
-                        Rate1m = rate1m,
-                        Rate5m = rate5m,
-                        Rate15m = rate15m
+                        MetricsReportType = MetricsReportTypes.Apdex,
+                        Apdex = GetApdex(currentDateTime, 1, 500)
                     });
 
                     await Task.Delay(timeout);
@@ -31,7 +25,7 @@ namespace Memores.Metrics.Wcf.Reporters.Counters {
             }, TaskCreationOptions.LongRunning);
         }
 
-        protected abstract long GetRate(DateTime currentDateTime, int min);
+        protected abstract long GetApdex(DateTime currentDateTime, int interval, int threshold);
 
         public void Stop() {
             //do nothing

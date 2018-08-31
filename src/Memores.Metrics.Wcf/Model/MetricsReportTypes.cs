@@ -10,6 +10,7 @@ namespace Memores.Metrics.Wcf.Model
     {
         Rates,
         ServiceCall,
-        Operation
+        Operation,
+        Apdex
     }
 }
