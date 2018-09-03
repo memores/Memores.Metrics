@@ -17,6 +17,9 @@ namespace Wcf.WcfServiceSample
         string GetData(int value);
 
         [OperationContract]
+        string GetException();
+
+        [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
         // TODO: Add your service operations here

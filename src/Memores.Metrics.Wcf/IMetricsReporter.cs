@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Memores.Metrics.Wcf.Model;
+using Memores.Metrics.Wcf.Model.Reports.Base;
 
 namespace Memores.Metrics.Wcf
 {
     public interface IMetricsReporter {
-        void Report(MetricsReport metricsReport);
+        void Report<TReport>(TReport metricsReport) where TReport : MetricsReportBase;
     }
 }
