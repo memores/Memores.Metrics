@@ -7,14 +7,19 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Memores.Metrics.Wcf.Handlers {
-    [Obsolete("Dosn`t implemented in current version")]
     internal class ErrorHandler : IErrorHandler {
+        private IMetricsReporter _reporter;
+
+        public ErrorHandler(IMetricsReporter reporter) {
+            _reporter = reporter;
+        }
+
         public void ProvideFault(Exception error, MessageVersion version, ref Message fault) {
-            throw new NotImplementedException();
+            //do nothing
         }
 
         public bool HandleError(Exception error) {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }
