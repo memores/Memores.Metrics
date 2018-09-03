@@ -3,10 +3,8 @@ using System.Diagnostics;
 using System.ServiceModel.Dispatcher;
 using Memores.Metrics.Wcf.Model;
 
-namespace Memores.Metrics.Wcf.Handlers
-{
-    public class ParametersInspector : IParameterInspector
-    {
+namespace Memores.Metrics.Wcf.Handlers {
+    internal class ParametersInspector : IParameterInspector {
         private readonly IMetricsReporter _reporter;
         private MetricsReport _paramatersInspectorMetricsReport;
         private Stopwatch _stopwatch;

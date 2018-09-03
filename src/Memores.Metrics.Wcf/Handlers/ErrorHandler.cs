@@ -6,10 +6,9 @@ using System.ServiceModel.Dispatcher;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Memores.Metrics.Wcf.Handlers
-{
-    public class ErrorHandler: IErrorHandler
-    {
+namespace Memores.Metrics.Wcf.Handlers {
+    [Obsolete("Dosn`t implemented in current version")]
+    internal class ErrorHandler : IErrorHandler {
         public void ProvideFault(Exception error, MessageVersion version, ref Message fault) {
             throw new NotImplementedException();
         }

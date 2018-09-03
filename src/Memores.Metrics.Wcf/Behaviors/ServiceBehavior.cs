@@ -4,10 +4,9 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 
-namespace Memores.Metrics.Wcf.Behaviors
-{
-    public class ServiceBehavior: IServiceBehavior
-    {
+namespace Memores.Metrics.Wcf.Behaviors {
+    public class ServiceBehavior : IServiceBehavior {
+        [Obsolete("Dosn`t implemented in current version")]
         public void Validate(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase) {
             //do nothing
         }
@@ -17,7 +16,7 @@ namespace Memores.Metrics.Wcf.Behaviors
         }
 
         public void ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase) {
-            //do nothing
+            throw new NotImplementedException();
         }
     }
 }

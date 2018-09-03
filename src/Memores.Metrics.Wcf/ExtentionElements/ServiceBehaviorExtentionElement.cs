@@ -7,10 +7,8 @@ using Memores.Metrics.Wcf.Behaviors;
 using Memores.Metrics.Wcf.ExtentionElements.Base;
 using Memores.Metrics.Wcf.Reporters;
 
-namespace Memores.Metrics.Wcf.ExtentionElements
-{
-    public class ServiceBehaviorExtentionElement: ElasticSearchBehaviorExtensionElementBase<ServiceBehavior>
-    {
+namespace Memores.Metrics.Wcf.ExtentionElements {
+    public class ServiceBehaviorExtentionElement : ElasticSearchBehaviorExtensionElementBase<ServiceBehavior> {
         protected override object Build(ElasticSearchMetricsReporter reporter) {
             return new ServiceBehavior();
         }

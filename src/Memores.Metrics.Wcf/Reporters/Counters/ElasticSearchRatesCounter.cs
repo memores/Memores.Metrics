@@ -5,7 +5,7 @@ using System.Text;
 using Memores.Metrics.Wcf.Model;
 
 namespace Memores.Metrics.Wcf.Reporters.Counters {
-    public class ElasticSearchRatesCounter : RatesCounterBase {
+    internal class ElasticSearchRatesCounter : RatesCounterBase {
 
         public ElasticSearchRatesCounter(IMetricsReporter reporter) : base(reporter) { }
 

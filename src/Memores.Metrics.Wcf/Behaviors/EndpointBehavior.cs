@@ -25,7 +25,7 @@ namespace Memores.Metrics.Wcf.Behaviors {
                 operation.ParameterInspectors.Add(new ParametersInspector(_reporter));
             }
         }
-        
+
 
         public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime) {
             //do nothing

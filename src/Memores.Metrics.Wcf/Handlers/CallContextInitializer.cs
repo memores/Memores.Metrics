@@ -4,10 +4,8 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
 using Memores.Metrics.Wcf.Model;
 
-namespace Memores.Metrics.Wcf.Handlers
-{
-    public class CallContextInitializer : ICallContextInitializer
-    {
+namespace Memores.Metrics.Wcf.Handlers {
+    internal class CallContextInitializer : ICallContextInitializer {
         private readonly IMetricsReporter _reporter;
         private MetricsReport _callContextMetricsReport;
 
@@ -25,7 +23,7 @@ namespace Memores.Metrics.Wcf.Handlers
                     }
                 }
             };
-            
+
             return null;
         }
 
