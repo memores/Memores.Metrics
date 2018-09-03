@@ -9,7 +9,9 @@
     <Description>Metrics for WCF services with ElasticSearch reporting</Description>
     <SignAssembly>false</SignAssembly>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>    
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageTags>WCF Metrics ElasticSearch</PackageTags>
+    <Copyright>Copyright ©2018 Pavel Dorovskii</Copyright>    
   </PropertyGroup>
 
   <ItemGroup>
