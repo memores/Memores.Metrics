@@ -10,7 +10,7 @@ using Memores.Metrics.Wcf.Reporters;
 namespace Memores.Metrics.Wcf.ExtentionElements {
     public class ServiceBehaviorExtentionElement : ElasticSearchBehaviorExtensionElementBase<ServiceBehavior> {
         protected override object Build(ElasticSearchMetricsReporter reporter) {
-            return new ServiceBehavior();
+            return new ServiceBehavior(reporter);
         }
     }
 }

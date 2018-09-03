@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Memores.Metrics.Wcf.Model;
+using Memores.Metrics.Wcf.Model.Reports.Base;
 using Memores.Metrics.Wcf.Reporters.Counters;
 using Nest;
 
@@ -32,7 +33,7 @@ namespace Memores.Metrics.Wcf.Reporters {
         }
 
 
-        public void Report(MetricsReport metricsReport) {
+        public void Report(MetricsReportBase metricsReport) {
             metricsReport.DateEnd = DateTime.Now;
 
             _client.Index(metricsReport);

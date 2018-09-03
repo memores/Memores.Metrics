@@ -3,18 +3,19 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
 using Memores.Metrics.Wcf.Model;
+using Memores.Metrics.Wcf.Model.Reports;
 
 namespace Memores.Metrics.Wcf.Handlers {
     internal class CallContextInitializer : ICallContextInitializer {
         private readonly IMetricsReporter _reporter;
-        private MetricsReport _callContextMetricsReport;
+        private ServiceCallReport _callContextMetricsReport;
 
         public CallContextInitializer(IMetricsReporter reporter) {
             _reporter = reporter;
         }
 
         public object BeforeInvoke(InstanceContext instanceContext, IClientChannel channel, Message message) {
-            _callContextMetricsReport = new MetricsReport() {
+            _callContextMetricsReport = new ServiceCallReport() {
                 MetricsReportType = MetricsReportTypes.ServiceCall,
                 Tags = new List<Tag>() {
                     new Tag() {

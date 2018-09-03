@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Memores.Metrics.Wcf.Model;
+using Memores.Metrics.Wcf.Model.Reports;
 
 namespace Memores.Metrics.Wcf.Reporters.Counters.Base {
     public abstract class ApdexCounterBase : ICounter {
@@ -18,7 +19,7 @@ namespace Memores.Metrics.Wcf.Reporters.Counters.Base {
                 while (true) {
                     var currentDateTime = DateTime.Now;
 
-                    _reporter.Report(new MetricsReport() {
+                    _reporter.Report(new ApdexReport() {
                         MetricsReportType = MetricsReportTypes.Apdex,
                         Apdex = GetApdex(currentDateTime, 1, 500)
                     });

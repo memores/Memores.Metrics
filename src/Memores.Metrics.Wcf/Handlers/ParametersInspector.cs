@@ -2,11 +2,12 @@
 using System.Diagnostics;
 using System.ServiceModel.Dispatcher;
 using Memores.Metrics.Wcf.Model;
+using Memores.Metrics.Wcf.Model.Reports;
 
 namespace Memores.Metrics.Wcf.Handlers {
     internal class ParametersInspector : IParameterInspector {
         private readonly IMetricsReporter _reporter;
-        private MetricsReport _paramatersInspectorMetricsReport;
+        private OperationReport _paramatersInspectorMetricsReport;
         private Stopwatch _stopwatch;
 
         public ParametersInspector(IMetricsReporter reporter) {
@@ -16,7 +17,7 @@ namespace Memores.Metrics.Wcf.Handlers {
         public object BeforeCall(string operationName, object[] inputs) {
             _stopwatch = Stopwatch.StartNew();
 
-            _paramatersInspectorMetricsReport = new MetricsReport() {
+            _paramatersInspectorMetricsReport = new OperationReport() {
                 OperationName = operationName,
                 MetricsReportType = MetricsReportTypes.Operation,
                 Tags = new List<Tag>() {
