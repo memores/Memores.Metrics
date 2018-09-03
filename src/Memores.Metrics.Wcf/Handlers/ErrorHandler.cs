@@ -5,6 +5,7 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
 using System.Text;
 using System.Threading.Tasks;
+using Memores.Metrics.Wcf.Model.Reports;
 
 namespace Memores.Metrics.Wcf.Handlers {
     internal class ErrorHandler : IErrorHandler {
@@ -19,6 +20,12 @@ namespace Memores.Metrics.Wcf.Handlers {
         }
 
         public bool HandleError(Exception error) {
+            var type = error.GetType();
+            _reporter.Report(new ExceptionReport() {
+                Type = type.FullName,
+                Message = error.Message,
+                StackTrace = error.StackTrace
+            });
             return true;
         }
     }

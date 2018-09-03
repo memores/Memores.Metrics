@@ -16,6 +16,10 @@ namespace Wcf.WcfServiceSample {
             return string.Format("You entered: {0}", value);
         }
 
+        public string GetException() {
+            throw new NotImplementedException();
+        }
+
         public CompositeType GetDataUsingDataContract(CompositeType composite) {
             Thread.Sleep(10);
 
