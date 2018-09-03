@@ -33,7 +33,7 @@ namespace Memores.Metrics.Wcf.Reporters {
         }
 
 
-        public void Report(MetricsReportBase metricsReport) {
+        public void Report<TReport>(TReport metricsReport) where TReport : MetricsReportBase {
             metricsReport.DateEnd = DateTime.Now;
 
             _client.Index(metricsReport);

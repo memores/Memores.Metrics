@@ -9,6 +9,6 @@ using Memores.Metrics.Wcf.Model.Reports.Base;
 namespace Memores.Metrics.Wcf
 {
     public interface IMetricsReporter {
-        void Report(MetricsReportBase metricsReport);
+        void Report<TReport>(TReport metricsReport) where TReport : MetricsReportBase;
     }
 }
