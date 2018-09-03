@@ -4,7 +4,7 @@ Metrics for .Net reporting to ElasticSearch
 ### Description
 This project contains some metrics for WCF services with reporting results to ElasticSearch with Grafana visualization.
 ### How to use
-Add to web.config behavior extension element
+1. Add to web.config behavior extension element
 ```xml
   <system.serviceModel>
     <extensions>
@@ -15,7 +15,7 @@ Add to web.config behavior extension element
     ...
   </system.serviceModel>
 ```
-Add behavior with ElasticSearch settings such as host, port and index name
+2. Add behavior with ElasticSearch settings such as host, port and index name
 ```xml
     <behaviors>
       <endpointBehaviors>
@@ -25,7 +25,7 @@ Add behavior with ElasticSearch settings such as host, port and index name
       </endpointBehaviors>
     </behaviors>
 ```
-Start your service and make requests.
+3. Start your service and make requests.
 ### Visualization
-Import to your Grafana dashboard from https://github.com/memores/Memores.Metrics/tree/master/visualization
-Add data source and setup it in dashboard
+1. Import to your Grafana dashboard from https://github.com/memores/Memores.Metrics/tree/master/visualization
+2. Add data source and setup it in dashboard
