@@ -7,8 +7,7 @@ namespace Memores.Metrics.Wcf.Reporters.Counters {
     internal class ElasticSearchApdexCounter : ApdexCounterBase {
         public ElasticSearchApdexCounter(IMetricsReporter reporter) : base(reporter) { }
 
-        protected override long GetApdex(DateTime currentDateTime, int interval, int threshold)
-        {
+        protected override decimal GetApdex(DateTime currentDateTime, int interval, int threshold) {
             var client = ((ElasticSearchMetricsReporter) _reporter).GetClient();
 
             var calls = client.Count<OperationReport>(c => c
@@ -32,7 +31,7 @@ namespace Memores.Metrics.Wcf.Reporters.Counters {
 
             var toleratedCalls = client.Count<OperationReport>(c => c
                 .Query(q =>
-                    q.Range(m => m.Field(f => f.ProcessingTime).LessThan(threshold*4)) &&
+                    q.Range(m => m.Field(f => f.ProcessingTime).LessThan(threshold * 4)) &&
                     q.Range(m => m.Field(f => f.ProcessingTime).GreaterThanOrEquals(threshold)) &&
                     q.Match(m => m.Field(f => f.MetricsReportType).Query(((int) MetricsReportTypes.Operation).ToString())) &&
                     q.DateRange(
@@ -41,7 +40,12 @@ namespace Memores.Metrics.Wcf.Reporters.Counters {
                             .LessThan(currentDateTime)
                     ))).Count;
 
-            return calls == 0 ? 1 : (satisfiedCalls + (toleratedCalls / 2)) / calls;
+            return calls == 0 ? 1 : CalculateApdex(calls, satisfiedCalls, toleratedCalls);
+        }
+
+        private decimal CalculateApdex(long calls, long satisfiedCalls, long toleratedCalls) {
+            decimal apdex = ((decimal) satisfiedCalls + ((decimal) toleratedCalls / 2)) / (decimal) calls;
+            return apdex;
         }
     }
 }

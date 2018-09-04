@@ -29,7 +29,7 @@ namespace Memores.Metrics.Wcf.Reporters.Counters.Base {
             }, TaskCreationOptions.LongRunning, _cancellationTokenSource.Token);
         }
 
-        protected abstract long GetApdex(DateTime currentDateTime, int interval, int threshold);
+        protected abstract decimal GetApdex(DateTime currentDateTime, int interval, int threshold);
 
         public void Stop() {
             _cancellationTokenSource.Cancel();

@@ -2,6 +2,6 @@
 
 namespace Memores.Metrics.Wcf.Model.Reports {
     public class ApdexReport: MetricsReportBase {
-        public long Apdex { get; set; }
+        public decimal Apdex { get; set; }
     }
 }
