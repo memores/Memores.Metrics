@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -12,16 +13,19 @@ namespace Wcf.WcfServiceSample {
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class Service1 : IService1 {
         public string GetData(int value) {
-            Thread.Sleep(5);
+            Thread.Sleep(new Random().Next(500, 2500));
             return string.Format("You entered: {0}", value);
         }
 
         public string GetException() {
-            throw new NotImplementedException();
+            if(new Random().Next(0, 1)==1)
+                throw new NotImplementedException();
+
+            throw new InvalidOperationException();
         }
 
         public CompositeType GetDataUsingDataContract(CompositeType composite) {
-            Thread.Sleep(10);
+            Thread.Sleep(15);
 
             if (composite == null) {
                 throw new ArgumentNullException("composite");

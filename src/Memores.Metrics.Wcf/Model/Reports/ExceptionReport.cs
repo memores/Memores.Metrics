@@ -7,7 +7,7 @@ using Memores.Metrics.Wcf.Model.Reports.Base;
 
 namespace Memores.Metrics.Wcf.Model.Reports {
     public class ExceptionReport : MetricsReportBase {
-        public string Type { get; set; }
+        public string ExceptionType { get; set; }
         public string Message { get; set; }
         public string StackTrace { get; set; }
     }

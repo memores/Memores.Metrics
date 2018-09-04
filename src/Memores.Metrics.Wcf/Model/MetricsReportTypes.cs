@@ -11,6 +11,7 @@ namespace Memores.Metrics.Wcf.Model
         Rates,
         ServiceCall,
         Operation,
-        Apdex
+        Apdex,
+        Exception
     }
 }
