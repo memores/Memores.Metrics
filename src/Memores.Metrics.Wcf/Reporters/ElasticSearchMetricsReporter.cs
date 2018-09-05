@@ -30,6 +30,7 @@ namespace Memores.Metrics.Wcf.Reporters {
 
             new ElasticSearchRatesCounter(this).Start();
             new ElasticSearchApdexCounter(this).Start();
+            new HealthChecker(this).Start();
         }
 
 

@@ -12,6 +12,7 @@ namespace Memores.Metrics.Wcf.Model
         ServiceCall,
         Operation,
         Apdex,
-        Exception
+        Exception,
+        HealthCheck
     }
 }
