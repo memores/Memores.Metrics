@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net45</TargetFramework>
-    <Version>0.0.2-alpha</Version>
+    <Version>0.0.3-beta</Version>
     <Authors>Pavel Dorovskii</Authors>
     <PackageProjectUrl>https://github.com/memores/Memores.Metrics</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/memores/Memores.Metrics/blob/master/LICENSE</PackageLicenseUrl>
