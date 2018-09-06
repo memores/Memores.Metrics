@@ -8,12 +8,14 @@ using Memores.Metrics.Wcf.Model.Reports.Base;
 namespace Memores.Metrics.Wcf.Model.Reports
 {
     public class HealthCheckReport : MetricsReportBase {
-        public long TotalPhysicalMemory { get; set; }
-        public long AvailablePhysicalMemory { get; set; }
+        public float TotalPhysicalMemory { get; set; }
+        public float AvailablePhysicalMemory { get; set; }
+        public float PhysicalMemoryRate { get; set; }
 
-        public long TotalVirtualMemory { get; set; }
-        public long AvailableVirtualMemory { get; set; }
+        public float TotalVirtualMemory { get; set; }
+        public float AvailableVirtualMemory { get; set; }
+        public float VirtualMemoryRate { get; set; }
 
-        public long CpuRate { get; set; }
+        public float CpuRate { get; set; }
     }
 }
