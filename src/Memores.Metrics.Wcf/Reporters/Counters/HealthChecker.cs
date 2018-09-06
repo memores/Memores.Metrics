@@ -19,6 +19,7 @@ namespace Memores.Metrics.Wcf.Reporters.Counters {
         public void Start(int timeout = 1000) {
             var cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
             var virtualMemoryCounter = new PerformanceCounter("Memory", "Available MBytes");
+            DriveInfo c = new DriveInfo(Path.GetPathRoot(Environment.SystemDirectory));
             
 
             Task.Factory.StartNew(async (o) => {
@@ -26,7 +27,8 @@ namespace Memores.Metrics.Wcf.Reporters.Counters {
                     _reporter.Report(new HealthCheckReport() {
                         MetricsReportType = MetricsReportTypes.HealthCheck,
                         CpuRate = cpuCounter.NextValue(),
-                        AvailableVirtualMemory = virtualMemoryCounter.NextValue()
+                        AvailableVirtualMemory = virtualMemoryCounter.NextValue(),
+                        AvailablePhysicalMemory = ((double) c.AvailableFreeSpace)/1000000000
                     });
 
                     await Task.Delay(timeout);
